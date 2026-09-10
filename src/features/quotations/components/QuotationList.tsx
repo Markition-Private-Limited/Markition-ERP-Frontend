@@ -34,7 +34,7 @@ function QuotationRowActions({ quotation }: { quotation: Quotation }) {
           </button>
         </>
       )}
-      {quotation.status === 'ACCEPTED' && !quotation.sales_order_id && (
+      {quotation.status === 'ACCEPTED' && !quotation.converted_to_sales_order_id && (
         <button
           type="button"
           disabled={isPending}
@@ -52,7 +52,8 @@ export function QuotationList() {
   const query = useQuotations()
   if (query.isPending) return <p>Loading...</p>
   if (query.isError) return <p role="alert">{getApiErrorMessage(query.error)}</p>
-  if (!query.data.length) return <p>No quotations yet.</p>
+  const activeQuotations = query.data.filter((quotation) => !quotation.converted_to_sales_order_id)
+  if (!activeQuotations.length) return <p>No quotations yet.</p>
 
   const customerName = (q: Quotation) => q.customer?.company_name ?? q.customer_id
 
@@ -65,5 +66,5 @@ export function QuotationList() {
     { id: 'actions', header: 'Actions', sortable: false, render: (row) => <QuotationRowActions quotation={row} /> },
   ]
 
-  return <Table columns={columns} rows={query.data} getRowKey={(row) => row.id} caption="Quotations" />
+  return <Table columns={columns} rows={activeQuotations} getRowKey={(row) => row.id} caption="Quotations" />
 }

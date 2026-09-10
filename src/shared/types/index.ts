@@ -30,15 +30,15 @@ export type QuotationStatus = 'DRAFT' | 'SENT' | 'ACCEPTED' | 'REJECTED'
 export interface Quotation {
   id: string; quotation_number: string; customer_id: string; customer?: Customer
   subtotal: string; tax_amount: string; total_amount: string
-  status: QuotationStatus; sales_order_id: string | null; created_at: string; items: QuotationItem[]
+  status: QuotationStatus; converted_to_sales_order_id: string | null; created_at: string; items: QuotationItem[]
 }
 
 export interface SalesOrderItem {
   id: string; product_id: string; quantity: string; unit_price: string; line_total: string; product?: Product
 }
-export type SalesOrderStatus = 'PENDING' | 'FULFILLED' | 'CANCELLED'
+export type SalesOrderStatus = 'CONFIRMED' | 'FULFILLED' | 'CANCELLED'
 export interface SalesOrder {
   id: string; order_number: string; customer_id: string; customer?: Customer
   subtotal: string; tax_amount: string; total_amount: string
-  status: SalesOrderStatus; invoice_id: string | null; invoice?: Invoice; created_at: string; items: SalesOrderItem[]
+  status: SalesOrderStatus; invoiced: boolean; invoice?: Invoice; created_at: string; items: SalesOrderItem[]
 }

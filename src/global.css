@@ -212,6 +212,9 @@ fieldset p { margin: 4px 0 12px 26px; color: #667085; font-size: 13px; }
 .sort-button:hover:not(:disabled) { background: var(--color-secondary); }
 .table-actions { display: flex; align-items: flex-start; gap: 8px; }
 .table-actions form { min-width: 180px; }
+.serial-selector { display: flex; min-width: 260px; flex-direction: column; gap: 8px; }
+.serial-selector p { margin: 0; }
+.serial-select-row { display: flex; flex-direction: column; gap: 4px; color: var(--color-secondary); font-size: 13px; font-weight: 600; }
 .status { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; }
 .status-issued { background: var(--color-accent); color: var(--color-white); }
 .status-draft { background: #e5e7eb; color: #475467; }
